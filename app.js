@@ -1,7 +1,4 @@
 'use strict';
-function randomCust(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let table = document.getElementById('table');
@@ -9,9 +6,9 @@ let table = document.getElementById('table');
 console.log(table);
 //let head = document.createElement('thead');
 //let foot = document.createElement('tfoot');
-table.appendChild(head);
+//table.appendChild(head);
 //table.appendChild(body);
-table.appendChild(foot);
+//table.appendChild(foot);
 
 // ******************* Constructor Function *************************
 function CookieShop(location, minCust, maxCust, avgCookie) {
@@ -20,7 +17,6 @@ function CookieShop(location, minCust, maxCust, avgCookie) {
   this.maxCust = maxCust;
   this.avgCookie = avgCookie;
   this.cookiesEachHour = [];
-  this.customersEachHour = [];
   this.totalCookies = 0;
 }
 let seattleShop = new CookieShop('Seattle', 23, 65, 6.3)
@@ -34,65 +30,67 @@ console.log(allShop);
 // ************* Helper Function **************
 function renderAll() {
   for (let i = 0; i < allShop.length; i++) {
-    allShop[i].customersEachHour();
     allShop[i].calculateCookiesEachHour();
     allShop[i].render();
     console.log(allShop[i]);
   }
 }
-renderHeader();
-renderAll();
 
 // ******** PROTOTYPE FUNCTION ***************
-CookieShop.prototype.render = function () {
-  let tr = document.createElement('tr');
-  table.appendChild(tr);
-  let th = document.createElement('th');
-  th.textContent = this.location;
-  tr.appendChild(th);
-  for (let i = 0; i < hours.length; i++) {
-    let td = document.createElement('td');
-    td.textContent = this.cookiesEachHour[i];
-    tr.appendChild(td);
-  }
-  let td = document.createElement('td');
-  td.textContent = this.totalCookies;
-  tr.appendChild(td);
-}
 CookieShop.prototype.calculateCustomersEachHour = function () {
-  for (let i = 0; i < hours.length; i++) {
-    this.customersEachHour.push(randomCust(this.minCust, this.maxCust));
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+  
+  
+  //for (let i = 0; i < hours.length; i++) {
+    //  this.customersEachHour.push(randomCust(this.minCust, this.maxCust));
   }
-}
-CookieShop.prototype.calculateCookiesEachHour = function () {
-  this.calculateCustomersEachHour()
-  for (let i = 0; i < hours.length; i++) {
-    this.cookiesEachHour.push(Math.floor(this.customersEachHour[i] * this.avgCookie));
-    this.totalCookies += this.cookiesEachHour[i];
+  
+  CookieShop.prototype.calculateCookiesEachHour = function () {
+    for (let i = 0; i < hours.length; i++) {
+      let cookieCount = (Math.floor(this.calculateCustomersEachHour() * this.avgCookie));
+      this.totalCookies += cookieCount;
+    }
+    CookieShop.prototype.render = function () {
+      let tr = document.createElement('tr');
+      table.appendChild(tr);
+      let th = document.createElement('th');
+      th.textContent = this.location;
+      tr.appendChild(th);
+      for (let i = 0; i < hours.length; i++) {
+        let td = document.createElement('td');
+        td.textContent = this.cookiesEachHour[i];
+        tr.appendChild(td);
+      }
+      let td = document.createElement('td');
+      td.textContent = this.totalCookies;
+      tr.appendChild(td);
+    }
+    
+    console.log(this.cookiesEachHour);
+    console.log(this.totalCookies);
+    console.log(this.customersEachHour);
   }
-  console.log(this.cookiesEachHour);
-  console.log(this.totalCookies);
-  console.log(this.customersEachHour);
-}
-function renderHeader() {
-  let header = document.createElement('tr');
+  function renderHeader() {
+    let header = document.createElement('tr');
   table.appendChild(header);
 }
-// seattleShop.calculateCookiesEachHour();
-// tokyoShop.calculateCookiesEachHour();
-// dubaiShop.calculateCookiesEachHour();
-// parisShop.calculateCookiesEachHour();
-// limaShop.calculateCookiesEachHour();
-
-
-// let Seattle = {
-//   name: 'Seattle',
-//   minCust: 23,
-//   maxCust: 65,
-//   avgCookieBought: 6.3,
-//   cookiesBought: [],
-//   generateCookies: function () {
-//     for (let i = 0; i < hours.length; i++) {
+//  seattleShop.calculateCookiesEachHour();
+//  tokyoShop.calculateCookiesEachHour();
+//  dubaiShop.calculateCookiesEachHour();
+//  parisShop.calculateCookiesEachHour();
+//  limaShop.calculateCookiesEachHour();
+ 
+ renderHeader();
+ renderAll();
+ 
+ // let Seattle = {
+   //   name: 'Seattle',
+   //   minCust: 23,
+   //   maxCust: 65,
+   //   avgCookieBought: 6.3,
+   //   cookiesBought: [],
+   //   generateCookies: function () {
+     //     for (let i = 0; i < hours.length; i++) {
 //       let randomNumb = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
 //       console.log(randomNumb);
 //       this.cookiesBought.push(randomNumb)
