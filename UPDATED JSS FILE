@@ -1,0 +1,74 @@
+'use strict';
+// ************* Helper Function **************
+function randomCust(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// ******************* Constructor Function *************************
+
+const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+let table = document.getElementById('table');
+//let body = document.createElement('tr');
+//console.log(table);
+let head = document.createElement('thead');
+//let foot = document.createElement('tfoot');
+table.appendChild(head);
+//table.appendChild(body);
+//table.appendChild(foot);
+function CookieShop(location, minCust, maxCust, avgCookie) {
+  this.location = location;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookie = avgCookie;
+  this.cookiesEachHour = [];
+  this.customersEachHour = [];
+  this.totalCookies = 0;
+}
+CookieShop.prototype.calculateCustomersEachHour = function () {
+  for (let i = 0; i < hours.length; i++) {
+    this.customersEachHour.push(randomCust(this.minCust, this.maxCust));
+  }
+}
+CookieShop.prototype.calculateCookiesEachHour = function () {
+  this.calculateCustomersEachHour()
+  for (let i = 0; i < hours.length; i++) {
+    this.cookiesEachHour.push(Math.floor(this.customersEachHour[i] * this.avgCookie));
+    this.totalCookies += this.cookiesEachHour[i];
+  }
+  console.log(this.cookiesEachHour);
+  console.log(this.totalCookies);
+  console.log(this.customersEachHour);
+}
+CookieShop.prototype.render = function () {
+}
+let seattleShop = new CookieShop('Seattle', 23, 65, 6.3)
+let tokyoShop = new CookieShop('Tokyo', 3, 24, 1.2)
+let dubaiShop = new CookieShop('Dubai', 11, 38, 3.7)
+let parisShop = new CookieShop('Paris', 20, 38, 2.3)
+let limaShop = new CookieShop('Lima', 2, 16, 4.6)
+//seattleShop.calculateCookiesEachHour();
+//tokyoShop.calculateCookiesEachHour();
+//dubaiShop.calculateCookiesEachHour();
+//parisShop.calculateCookiesEachHour();
+//limaShop.calculateCookiesEachHour();
+
+function renderHeader() {
+  let body = document.createElement('tbody');
+  let head = document.createElement('thead');
+  let tr = document.createElement('tr');
+  let th = document.createElement('th');
+  th.textContent = 'Location';
+  tr.appendChild(th);
+  for (let i = 0; i < hours.length; i++) {
+    th = document.createElement('th');
+    th.textContent = hours[i];
+    tr.appendChild(th);
+  }
+  th = document.createElement('th');
+  th.textContent = 'Total';
+  tr.appendChild(th);
+  head.appendChild(tr);
+  table.appendChild(tr);
+  //table.appendChild(tr);
+}
+//renderHeader();
