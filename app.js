@@ -2,13 +2,7 @@
 
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let table = document.getElementById('table');
-//let body = document.createElement('tr');
-console.log(table);
-//let head = document.createElement('thead');
-//let foot = document.createElement('tfoot');
-//table.appendChild(head);
-//table.appendChild(body);
-//table.appendChild(foot);
+let form = document.getElementById('form');
 
 // ******************* Constructor Function *************************
 function CookieShop(location, minCust, maxCust, avgCookie) {
@@ -104,12 +98,28 @@ CookieShop.prototype.calculateCookiesEachHour = function () {
     td.textContent = this.totalCookies;
     tr.appendChild(td);
   }
-
+  // ************* Event Listeners **************
+// Form Handling
+function handleSubmit(event) {
+  event.preventDefault();
+  let storeName = event.target.storeName.value;
+  let minimumCust = parseInt(event.target.minimumCust.value);
+  let maximumCust = parseInt(event.target.maximumCust.value);
+  let custPurchase = parseInt(event.target.custPurchase.value);
+  let newShop = new CookieShop(storeName, minimumCust, maximumCust, custPurchase);
+  document.querySelector ('tfoot').remove();
+  newShop.calculateCookiesEachHour();
+  newShop.render();
+  console.log(newShop);
+  allShop.push(newShop);
+  renderFooter();
+  form.reset();
+}
 
 renderHeader();
 renderAll();
 renderFooter();
-
+form.addEventListener('submit', handleSubmit);
  // let Seattle = {
    //   name: 'Seattle',
    //   minCust: 23,

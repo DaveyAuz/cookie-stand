@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,31 @@
   <link rel="stylesheet" type="text/css" href="CSS/Style.css">
   <title>Sales Data</title>
 </head>
-<body>
-<table id ="table">
 
-</table>
-<script type="text/javascript" src="./app.js"></script>
+<body>
+  <table id="table">
+    <form id="form">
+      <Fieldset>
+        <legend id="form-title">Davey's Delicious Cookies</legend>
+
+        <label for="storeName">Store Name</label>
+        <input type="text" id="storeName" name="storeName">
+
+        <label for="minimumCust">Minimum Capacity</label>
+        <input type="number" id="minimumCust" name="minimumCust">
+
+        <label for="maximumCust">Maximum Capacity</label>
+        <input type="number" id="maximumCust" name="maximumCust">
+
+        <label for="custPurchase">Average Cookies Bought By Customer</label>
+        <input type="number" id="custPurchase" name="custPurchase">
+
+
+      </Fieldset>
+      <button type="submit">Submit</button>
+    </form>
+  </table>
+  <script type="text/javascript" src="./app.js"></script>
 </body>
+
 </html>
