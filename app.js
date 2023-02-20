@@ -35,54 +35,81 @@ function renderAll() {
     console.log(allShop[i]);
   }
 }
-
+function renderHeader() {
+  let tr = document.createElement('tr');
+  table.appendChild(tr);
+  let th = document.createElement('th');
+  tr.appendChild(th);
+  for (let i = 0; i < hours.length; i++) {
+    let td = document.createElement('td');
+    td.textContent = hours[i];
+    tr.appendChild(td);
+  }
+  let td = document.createElement('td');
+    td.textContent = "Daily Total Cookies";
+    tr.appendChild(td);
+}
+function renderFooter() {
+  let leftFoot = document.createElement('tfoot');
+  table.appendChild(leftFoot);
+  let footRow = document.createElement('tr');
+  leftFoot.appendChild(footRow);
+  let footData = document.createElement('td');
+  footData.textContent = "Hourly Total";
+  footRow.appendChild(footData);
+  let grandTotal = 0; // Does Not Reset on loop completion
+for (let i = 0; i < hours.length; i++) {
+  let hourlyTotal = 0;   // Reset Hourly Total to 0 on each loop iteration
+  for (let j = 0; j < allShop.length; j++) {
+    hourlyTotal += allShop[j].cookiesEachHour[i]; 
+    grandTotal += allShop[j].cookiesEachHour[i];
+  }
+  let shopTotal = document.createElement('td');
+  shopTotal.textContent = hourlyTotal;
+  footRow.appendChild(shopTotal);
+  console.log(hourlyTotal);
+}
+  let rightFoot = document.createElement('td');
+  rightFoot.textContent = grandTotal;
+  footRow.appendChild(rightFoot);
+}
 // ******** PROTOTYPE FUNCTION ***************
 CookieShop.prototype.calculateCustomersEachHour = function () {
   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
-  
-  
+
+
   //for (let i = 0; i < hours.length; i++) {
-    //  this.customersEachHour.push(randomCust(this.minCust, this.maxCust));
+  //  this.customersEachHour.push(randomCust(this.minCust, this.maxCust));
+}
+
+CookieShop.prototype.calculateCookiesEachHour = function () {
+  for (let i = 0; i < hours.length; i++) {
+    let cookieCount = (Math.floor(this.calculateCustomersEachHour() * this.avgCookie));
+    this.cookiesEachHour.push(cookieCount);
+    this.totalCookies += cookieCount;
   }
-  
-  CookieShop.prototype.calculateCookiesEachHour = function () {
+}
+  CookieShop.prototype.render = function () {
+    let tr = document.createElement('tr');
+    table.appendChild(tr);
+    let th = document.createElement('th');
+    th.textContent = this.location;
+    tr.appendChild(th);
     for (let i = 0; i < hours.length; i++) {
-      let cookieCount = (Math.floor(this.calculateCustomersEachHour() * this.avgCookie));
-      this.totalCookies += cookieCount;
-    }
-    CookieShop.prototype.render = function () {
-      let tr = document.createElement('tr');
-      table.appendChild(tr);
-      let th = document.createElement('th');
-      th.textContent = this.location;
-      tr.appendChild(th);
-      for (let i = 0; i < hours.length; i++) {
-        let td = document.createElement('td');
-        td.textContent = this.cookiesEachHour[i];
-        tr.appendChild(td);
-      }
       let td = document.createElement('td');
-      td.textContent = this.totalCookies;
+      td.textContent = this.cookiesEachHour[i];
       tr.appendChild(td);
     }
-    
-    console.log(this.cookiesEachHour);
-    console.log(this.totalCookies);
-    console.log(this.customersEachHour);
+    let td = document.createElement('td');
+    td.textContent = this.totalCookies;
+    tr.appendChild(td);
   }
-  function renderHeader() {
-    let header = document.createElement('tr');
-  table.appendChild(header);
-}
-//  seattleShop.calculateCookiesEachHour();
-//  tokyoShop.calculateCookiesEachHour();
-//  dubaiShop.calculateCookiesEachHour();
-//  parisShop.calculateCookiesEachHour();
-//  limaShop.calculateCookiesEachHour();
- 
- renderHeader();
- renderAll();
- 
+
+
+renderHeader();
+renderAll();
+renderFooter();
+
  // let Seattle = {
    //   name: 'Seattle',
    //   minCust: 23,
