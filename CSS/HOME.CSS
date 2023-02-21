@@ -1,0 +1,94 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Libre+Baskerville&family=Orbitron:wght@500&family=Oswald:wght@300&display=swap');
+
+* {
+  font-family: ORBITRON;
+  color: rgb(255, 0, 0);
+}
+
+body {
+  background: rgb(64, 4, 167);
+
+}
+
+header nav{
+  display: flex;
+  justify-content: center;
+  background-color: #FFF200;
+  font-size: 20px;
+  border-radius: 20%;
+}
+
+#salmoncookie1 {
+  margin-left: 140px;
+}
+
+#Salmoncookie2 {
+  margin:auto;
+}
+
+h1{
+  font-weight: extra bold;
+  font-size: 3em;
+  text-align: center;
+  background-color: #FFF200;
+  border-radius: 15%;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#storeInfo{
+  font-size: 1em;
+  text-align: center;
+  background-color: rgb(255, 149, 0);
+  border-radius: 10%;
+  margin: 20px;
+  padding: 10px;
+}
+
+#productSection {
+  display: inline-block;
+  text-align: center;
+  background-color: rgb(21, 255, 0);
+  margin-left: 70%;
+  margin-bottom: 30px;
+  border-radius: 0%;
+  justify-content: center;
+}
+
+article{
+  display: inline-block;
+  border: 1px dashed rgb(0, 0, 96);
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+#Salmoncookie{
+  border-radius: 25%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer{
+  background-color: rgb(0, 0, 0);
+  color:white;
+  width: auto;
+  height: 30%;
+  border: solid 1px black;
+  text-align: center;
+  border-radius: 25%;
+  padding: 10px;
+  margin: 10px;
+  
+}
